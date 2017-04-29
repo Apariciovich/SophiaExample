@@ -1,0 +1,34 @@
+# sophia makefile
+#
+
+buildworld = 1
+
+include mk/sophia
+include $(addsuffix /makefile, $(SOPHIA_DIRS))
+
+OPLATFORM = $(LIBSS_OBJECTS) \
+            $(LIBSF_OBJECTS) \
+            $(LIBSR_OBJECTS) \
+            $(LIBSO_OBJECTS) \
+            $(LIBSV_OBJECTS) \
+            $(LIBSW_OBJECTS) \
+            $(LIBSD_OBJECTS) \
+            $(LIBSI_OBJECTS) \
+            $(LIBSX_OBJECTS) \
+            $(LIBSY_OBJECTS) \
+            $(LIBSC_OBJECTS) \
+            $(LIBSE_OBJECTS) \
+            $(SOPHIA_OBJECTS)
+O = $(OPLATFORM)
+
+all: banner $(O)
+
+banner:
+	$(E) "SOPHIA $(SOPHIA_VMAJOR).$(SOPHIA_VMINOR) (syntax-checker)"
+	$(E)
+
+.c.o:
+	$(E) "$(CC) $<"
+	$(Q) $(CC) $(CFLAGS_SOPHIA) -c $< -o $@
+
+# vim: syntax=make
